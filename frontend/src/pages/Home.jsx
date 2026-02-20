@@ -25,10 +25,29 @@ function Home() {
     loadPopularGames();
   }, []);
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
-    alert(`Searching for: ${searchQuery}`);
-    setSearchQuery("");
+
+    if (!searchQuery.trim()) {
+      return;
+    }
+
+    setLoading(true);
+
+    if (loading) {
+      return
+    }
+
+    try {
+      const searchResults = await searchGames(searchQuery);
+      setGames(searchResults);
+      setError(null);
+    } catch (err) {
+      console.error("Search Error:", err);
+      setError("Failed to search games. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -46,11 +65,17 @@ function Home() {
         </button>
       </form>
 
-      <div className="game-grid">
-        {games.map((game) => (
-          <GameCard game={game} key={game.id} />
-        ))}
-      </div>
+      {error && <div className="error-message">{error}</div>}
+
+      {loading ? (
+        <div className="Loading">Loading...</div>
+      ) : (
+        <div className="game-grid">
+          {games.map((game) => (
+            <GameCard game={game} key={game.id} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

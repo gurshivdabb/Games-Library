@@ -1,22 +1,37 @@
-const API_KEY = import.meta.env.VITE_API_KEY;
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-const CORS_PROXY = "https://api.allorigins.win/raw?url=";
+const BACKEND_URL = "http://localhost:5000/api";
 
-console.log("API_KEY:", API_KEY);
-console.log("BASE_URL:", BASE_URL);
+console.log("Using backend URL:", BACKEND_URL);
 
 export const getPopularGames = async () => {
-    const url = `${BASE_URL}/games?key=${API_KEY}`;
-    const response = await fetch(`${CORS_PROXY}${encodeURIComponent(url)}`);
-    const data = await response.json();
-    console.log("API Response:", data);
-    return data.results || [];
+    try {
+        const response = await fetch(`${BACKEND_URL}/games/popular`);
+        
+        if (!response.ok) {
+            throw new Error(`Backend error: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log("API Response:", data);
+        return data.results || [];
+    } catch (error) {
+        console.error("Error fetching popular games:", error);
+        throw error;
+    }
 };
 
 export const searchGames = async (query) => {
-    const url = `${BASE_URL}/games?search=${encodeURIComponent(query)}&key=${API_KEY}`;
-    const response = await fetch(`${CORS_PROXY}${encodeURIComponent(url)}`);
-    const data = await response.json();
-    console.log("Search Response:", data);
-    return data.results || [];
+    try {
+        const response = await fetch(`${BACKEND_URL}/games/search?query=${encodeURIComponent(query)}`);
+        
+        if (!response.ok) {
+            throw new Error(`Backend error: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log("Search Response:", data);
+        return data.results || [];
+    } catch (error) {
+        console.error("Error searching games:", error);
+        throw error;
+    }
 }
