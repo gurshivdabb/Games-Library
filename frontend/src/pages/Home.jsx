@@ -1,17 +1,29 @@
 import GameCard from "../components/GameCard";
-import { useState } from "react";
-import '../css/Home.css';
+import { useState, useEffect } from "react";
+import { searchGames, getPopularGames } from "../services/api";
+import "../css/Home.css";
 
 function Home() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [games, setGames] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const games = [
-    { id: 1, title: "Red Dead Redemption 2", releaseDate: "2018-10-26" },
-    { id: 2, title: "The Witcher 3: Wild Hunt", releaseDate: "2015-05-19" },
-    { id: 3, title: "Cyberpunk 2077", releaseDate: "2020-12-10" },
-    { id: 4, title: "God of War", releaseDate: "2018-04-20" },
-    { id: 5, title: "Marvel's Spider-Man 2", releaseDate: "2023-10-20" },
-  ];
+  useEffect(() => {
+    const loadPopularGames = async () => {
+      try {
+        const popularGames = await getPopularGames();
+        setGames(popularGames);
+      } catch (err) {
+        console.error("API Error:", err);
+        setError("Failed to load popular games. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPopularGames();
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();

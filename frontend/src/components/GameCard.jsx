@@ -8,8 +8,8 @@ function GameCard({game}) {
 
     return (
     <div className="game-card">
-        <div className="game-image">
-            <img src={game.url} alt={game.title} />
+        <div className="game-poster">
+            <img src={game.background_image} alt={game.name} />
             <div className="game-overlay">
                 <button className="fav-btn" onClick={onFavClick}>
                     ❤️
@@ -17,8 +17,8 @@ function GameCard({game}) {
             </div>
         </div>
         <div className="game-info">
-            <h3>{game.title}</h3>
-            <p>{game.releaseDate}</p>
+            <h3>{game.name}</h3>
+            <p>{game.released}</p>
         </div>
     </div>
     );

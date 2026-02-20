@@ -1,14 +1,22 @@
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = import.meta.env.VITE_BASE_URL;
+const CORS_PROXY = "https://api.allorigins.win/raw?url=";
+
+console.log("API_KEY:", API_KEY);
+console.log("BASE_URL:", BASE_URL);
 
 export const getPopularGames = async () => {
-    const response = await fetch(`${BASE_URL}/games/popular?api_key=${API_KEY}`);
+    const url = `${BASE_URL}/games?key=${API_KEY}`;
+    const response = await fetch(`${CORS_PROXY}${encodeURIComponent(url)}`);
     const data = await response.json();
-    return data.results;
+    console.log("API Response:", data);
+    return data.results || [];
 };
 
 export const searchGames = async (query) => {
-    const response = await fetch(`${BASE_URL}/games/search?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
+    const url = `${BASE_URL}/games?search=${encodeURIComponent(query)}&key=${API_KEY}`;
+    const response = await fetch(`${CORS_PROXY}${encodeURIComponent(url)}`);
     const data = await response.json();
-    return data.results;
+    console.log("Search Response:", data);
+    return data.results || [];
 }
