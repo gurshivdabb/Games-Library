@@ -1,3 +1,5 @@
+import '../css/GameCard.css';
+
 function GameCard({game}) {
 
     function onFavClick() {
