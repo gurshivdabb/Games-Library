@@ -3,11 +3,12 @@ import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import NavBar from "./components/NavBar";
 import { Routes, Route } from "react-router-dom";
+import {GameProvider} from "./contexts/GameContext";
 import "./css/NavBar.css";
 
 function App() {
   return (
-    <div>
+    <GameProvider>
       <NavBar />
       <main className="main-content">
         <Routes>
@@ -15,7 +16,7 @@ function App() {
           <Route path="/favorites" element={<Favorites />} />
         </Routes>
       </main>
-    </div>
+    </GameProvider>
   );
 }
 
