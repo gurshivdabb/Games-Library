@@ -46,7 +46,7 @@ export const GameProvider = ({ children }) => {
 
   // Function to check if a game is in the favorites list by its ID
   const isFavorite = (gameId) => {
-    return favorites.some((game) => game.Id === gameId);
+    return favorites.some((game) => game.id === gameId);
   };
 
   // The value object that will be provided to the context consumers, containing the favorites state and helper functions
