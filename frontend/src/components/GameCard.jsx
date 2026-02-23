@@ -1,3 +1,8 @@
+/**
+ * GameCard.jsx
+ * Component to display individual game information in a card format.
+ */
+
 import '../css/GameCard.css';
 
 function GameCard({game}) {

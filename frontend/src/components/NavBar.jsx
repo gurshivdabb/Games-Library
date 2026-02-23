@@ -1,3 +1,9 @@
+/**
+ * NavBar.jsx
+ * Component to display the navigation bar at the top of the application.
+ * Provides links to the Home and Favorites pages.
+ */
+
 import { Link } from "react-router-dom";
 import "../css/NavBar.css";
 
