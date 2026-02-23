@@ -12,7 +12,7 @@ function GameCard({game}) {
             <img src={game.background_image} alt={game.name} />
             <div className="game-overlay">
                 <button className="fav-btn" onClick={onFavClick}>
-                    ❤️
+                    🤍
                 </button>
             </div>
         </div>
