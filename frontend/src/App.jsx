@@ -14,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/game/:id" element={<GameDetails />} />
         </Routes>
       </main>
     </GameProvider>
