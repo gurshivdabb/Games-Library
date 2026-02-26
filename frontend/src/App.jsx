@@ -2,6 +2,7 @@ import "./css/App.css";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import NavBar from "./components/NavBar";
+import GameDetails from "./pages/GameDetails";
 import { Routes, Route } from "react-router-dom";
 import {GameProvider} from "./contexts/GameContext";
 import "./css/NavBar.css";
