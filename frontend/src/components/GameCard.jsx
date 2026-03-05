@@ -4,9 +4,11 @@
  */
 
 import '../css/GameCard.css';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation to game details page
 import { useGameContext } from "../contexts/GameContext"; // Import the GameContext to manage favorites
 
 function GameCard({game}) {
+    const navigate = useNavigate(); // Initialize useNavigate for navigation
     const {isFavorite, addToFavorites, removeFromFavorites} = useGameContext(); // Access the game context functions
     const favorite = isFavorite(game.id) // Check if the current game is in the favorites list
 
@@ -19,6 +21,12 @@ function GameCard({game}) {
         }
     }
 
+    function handleClick(e) {
+        e.preventDefault(); // Prevent default click behavior
+        // Implement navigation to game details page
+        navigate(`/game/${game.id}`, { state: { game } }); // Navigate to the game details page and pass the game data as state
+    }
+
     return (
     <div className="game-card">
         <div className="game-poster">
@@ -29,7 +37,7 @@ function GameCard({game}) {
                 </button>
             </div>
         </div>
-        <div className="game-info">
+        <div className="game-info" onClick={handleClick}>
             <h3>{game.name}</h3>
             <p>{game.released}</p>
         </div>

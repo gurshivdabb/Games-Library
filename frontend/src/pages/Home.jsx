@@ -35,7 +35,7 @@ function Home() {
     setLoading(true);
 
     if (loading) {
-      return
+      return;
     }
 
     try {
